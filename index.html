@@ -1,0 +1,579 @@
+<!doctype html>
+<html>
+<head>
+    <title>Специализации 2020</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+        html {
+            min-height: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        body {
+            height: 100%;
+            min-height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: 'Roboto Slab', serif;
+        }
+        .header1 {
+            font-size: 2rem;
+            margin: 0;
+            margin-top: 100px;
+            margin-bottom: 30px;
+        }
+        .doors {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .door {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .door .name {
+
+        }
+        .door .image {
+            background-image: url(images/door.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 90px;
+            margin-left: 40px;
+        }
+        .door .image-apr {
+            background-image: url(images/door-guard.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 90px;
+            margin-left: 40px;
+        }
+        .door .queue {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .door .queue .chel {
+            width: 40px;
+            height: 80px;
+            margin: 2px;
+            margin-right: -10px;
+            margin-bottom: -40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .door .queue .class-0 { background-image: url(images/man/happy/class0.png) !important; }
+        .door .queue .class-1 { background-image: url(images/man/happy/class1.png) !important; }
+        .door .queue .class-2 { background-image: url(images/man/happy/class2.png) !important; }
+        .door .queue .class-3 { background-image: url(images/man/happy/class3.png) !important; }
+        .door .queue .class-4 { background-image: url(images/man/happy/class4.png) !important; }
+        .door .queue .class-5 { background-image: url(images/man/happy/class5.png) !important; }
+        .door .queue .sad-class-0 { background-image: url(images/man/sad/class0.png) !important; }
+        .door .queue .sad-class-1 { background-image: url(images/man/sad/class1.png) !important; }
+        .door .queue .sad-class-2 { background-image: url(images/man/sad/class2.png) !important; }
+        .door .queue .sad-class-3 { background-image: url(images/man/sad/class3.png) !important; }
+        .door .queue .sad-class-4 { background-image: url(images/man/sad/class4.png) !important; }
+        .door .queue .sad-class-5 { background-image: url(images/man/sad/class5.png) !important; }
+        .door .queue .think-class-0 { background-image: url(images/man/think/class0.png) !important; }
+        .door .queue .think-class-1 { background-image: url(images/man/think/class1.png) !important; }
+        .door .queue .think-class-2 { background-image: url(images/man/think/class2.png) !important; }
+        .door .queue .think-class-3 { background-image: url(images/man/think/class3.png) !important; }
+        .door .queue .think-class-4 { background-image: url(images/man/think/class4.png) !important; }
+        .door .queue .think-class-5 { background-image: url(images/man/think/class5.png) !important; }
+        .me {
+            display: inline-block;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            color: #aaa;
+            margin: 15px;
+            z-index: 2;
+            font-size: 0.9rem;
+        }
+        .games {
+            display: inline-block;
+            position: fixed;
+            right: 0;
+            top: 0;
+            color: #aaa;
+            margin: 15px;
+            z-index: 2;
+            font-size: 0.9rem;
+        }
+        .games a {
+            text-decoration: none;
+            color: #aaa;
+        }
+        #timer {
+            display: inline-block;
+            position: fixed;
+            left: 0;
+            top: 0;
+            color: #aaa;
+            margin: 15px;
+            z-index: 2;
+            font-size: 1.3rem;
+        }
+        .delim {
+            display: inline-block;
+            background-color: white;
+            width: 100px;
+            height: 40px;
+            font-size: 0.8rem;
+            font-style: italic;
+            visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .add-queue {
+            margin-top: 5px !important;
+        }
+        .colors {
+            display: flex;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            margin: 10px;
+            margin-bottom: 15px;
+            font-size: 0.7rem;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 90px;
+            color: #aaa;
+        }
+        .colors .color {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .colors .color .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            margin: 0;
+            margin-right: 5px;
+        }
+        .thinkchel {
+            margin-bottom: -50px !important;
+            margin-right: -15px !important;
+        }
+        .thinkqueue {
+            grid-template-columns: repeat(7, 1fr) !important;
+        }
+        .kolpak {
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+    </style>
+    <script src='data.js'></script>
+</head>
+<body>
+
+<div class='header1'>Что же с нами стало?</div>
+<div class='doors' id='doors_obj'>
+    <div class='door'>
+        <div class='name' id='crowd-stat'>¯\_(ツ)_/¯</div>
+        <div class='image' style='background-image: url(images/choosing.png) !important;
+            margin-left: 20px;'></div>
+        <div class='queue thinkqueue' id='crowd'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='mi-stat'>МИ</div>
+        <div class='image'></div>
+        <div class='queue' id='mi'></div>
+        <div class='delim' id='mi-delim'></div>
+        <div class='queue add-queue' id='mi-add'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='ti-stat'>ТИ</div>
+        <div class='image'></div>
+        <div class='queue' id='ti'></div>
+        <div class='delim' id='ti-delim'></div>
+        <div class='queue add-queue' id='ti-add'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='adis-stat'>АДИС</div>
+        <div class='image'></div>
+        <div class='queue' id='adis'></div>
+        <div class='delim' id='adis-delim'></div>
+        <div class='queue add-queue' id='adis-add'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='apr-stat'>АПР</div>
+        <div class='image-apr'></div>
+        <div class='queue' id='apr'></div>
+        <div class='delim' id='apr-delim'></div>
+        <div class='queue add-queue' id='apr-add'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='mop-stat'>МОП</div>
+        <div class='image'></div>
+        <div class='queue' id='mop'></div>
+        <div class='delim' id='mop-delim'>Астанавитес...</div>
+        <div class='queue add-queue' id='mop-add'></div>
+    </div>
+    <div class='door'>
+        <div class='name' id='rs-stat'>РС</div>
+        <div class='image'></div>
+        <div class='queue' id='rs'></div>
+        <div class='delim' id='rs-delim'></div>
+        <div class='queue add-queue' id='rs-add'></div>
+    </div>
+    
+</div>
+
+<div class='games'>
+    <a class='game-link' href='dinosaur.html'>Игра динозавры</a>
+</div>
+
+<div class='me'>@sil3ntz &amp; @konodyuk</div>
+    <div id='timer'></div>
+    <div class='colors'>
+        Рейтинг:
+        <div class='color'>
+            <div class='circle' style='background-color: rgb(255, 184, 28);'></div>
+            <div class='descr'>1-29</div>
+        </div>
+        <div class='color'>
+            <div class='circle' style='background-color: #1ca754;'></div>
+            <div class='descr'>30-59</div>
+        </div>
+        <div class='color'>
+            <div class='circle' style='background-color: rgb(0, 0, 255);'></div>
+            <div class='descr'>60-89</div>
+        </div>
+        <div class='color'>
+            <div class='circle' style='background-color: rgb(255, 0, 255);'></div>
+            <div class='descr'>90-119</div>
+        </div>
+        <div class='color'>
+            <div class='circle' style='background-color: rgb(0, 0, 0);'></div>
+            <div class='descr'>120-149</div>
+        </div>
+        <div class='color'>
+            <div class='circle' style='background-color: rgb(109, 154, 202);'></div>
+            <div class='descr'>150+</div>
+        </div>
+    </div>
+
+<script>
+    function create_rated_chel(spec, rating_bin, total, kolpak_obj, options) {
+        let chel = document.createElement("div")
+        let class_postfix = 'class-' + rating_bin
+
+        if (kolpak_obj !== undefined) {
+            let kolpak_div = document.createElement("div")
+            let kolpak_style = ''
+            for (let prop in kolpak_obj) {
+                kolpak_style += prop + ': ' + kolpak_obj[prop] + '; '
+            }
+            kolpak_div.setAttribute('style', kolpak_style)
+            kolpak_div.setAttribute('class', 'kolpak')
+            chel.appendChild(kolpak_div)
+        }
+
+        if (options !== undefined) {
+            let chel_style = ''
+            for (let prop in options) {
+                chel_style += prop + ': ' + options[prop] + ' !important; '
+            }
+            chel.setAttribute('style', chel_style)
+        }
+
+        if (spec === 'crowd') {
+            chel.setAttribute('class', 'chel thinkchel think-' + class_postfix)
+            document.getElementById(spec).appendChild(chel)
+        } else if (total < 60) {
+            chel.setAttribute('class', 'chel ' + class_postfix)
+            document.getElementById(spec).appendChild(chel)
+        } else {
+            chel.setAttribute('class', 'chel sad-' + class_postfix)
+            document.getElementById(spec + '-add').appendChild(chel)
+        }
+    }
+
+    let thinking = {
+        0: 29,
+        1: 30,
+        2: 30,
+        3: 30,
+        4: 30,
+        5: 222 - 30 * 5 + 1,
+        'total': 222
+    }
+
+    let kolpaki = {
+        'mop': {
+            0: [],
+            1: [
+                {
+                    'background-image': 'url(images/kolpaki/6.png)',
+                    top: '-9px',
+                    left: '7px',
+                    width: '23px',
+                    height: '23px',
+                }
+            ],
+            2: [
+                {},
+                {
+                    'background-image': 'url(images/kolpaki/7.png)',
+                    top: '-15px',
+                    left: '7px',
+                    width: '30px',
+                    height: '30px',
+                }
+            ],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'ti': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [
+                {
+                    'background-image': 'url(images/kolpaki/3.png)',
+                    top: '-9px',
+                    left: '9px',
+                    width: '21px',
+                    height: '21px',
+                    transform: 'rotate(-15deg)',
+                }
+            ],
+        },
+        'rs': {
+            0: [],
+            1: [],
+            2: [
+                {
+                    'background-image': 'url(images/kolpaki/4.png)',
+                    top: '-5px',
+                    left: '9px',
+                    width: '18px',
+                    height: '18px',
+                }
+            ],
+            3: [],
+            4: [
+                {
+                    'background-image': 'url(images/kolpaki/2.png)',
+                    top: '-38px',
+                    left: '-3px',
+                    width: '60px',
+                    height: '60px',
+                },
+                {
+                    'background-image': 'url(images/kolpaki/5.png)',
+                    top: '-18px',
+                    left: '6px',
+                    width: '30px',
+                    height: '30px',
+                }
+            ],
+            5: [
+                {
+                    'background-image': 'url(images/kolpaki/1.png)',
+                    top: '-9px',
+                    left: '7px',
+                    width: '22px',
+                    height: '22px',
+                }
+            ],
+        },
+        'adis': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'apr': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'mi': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+    }
+
+    let options = {
+        'mop': {
+            0: [],
+            1: [],
+            2: [
+                {
+                    'background-image': 'url(images/options/2.gif)',
+                    'z-index': 3,
+                }
+            ],
+            3: [],
+            4: [
+                {
+                    'background-image': 'url(images/options/1.png)',
+                }
+            ],
+            5: [],
+        },
+        'ti': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'rs': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'adis': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'apr': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+        },
+        'mi': {
+            0: [],
+            1: [],
+            2: [],
+            3: [],
+            4: [
+                {
+                    'background-image': 'url(images/options/notstonks.gif)',
+                    'width': '50px',
+                }
+            ],
+            5: [
+                {
+                    'background-image': 'url(images/options/tyan.gif)',
+                    'height': '60px',
+                    'width': '50px',
+                },
+                {
+                    'background-image': 'url(images/options/stonks2.png)',
+                },
+                {
+                    'background-image': 'url(images/options/stonks.gif)',
+                    'width': '50px',
+                }
+            ],
+        },
+    }
+
+    for (let value in distrib) {
+        document.getElementById(value + '-stat').innerHTML += ' (' + distrib[value]['total'] + ')'
+        thinking['total'] -= distrib[value]['total']
+        if (distrib[value]['total'] > 60) {
+            document.getElementById(value + '-delim').style.visibility = "visible"
+        }
+        let current_total = 0
+        for (let rating_bin in distrib[value]) {
+            if (rating_bin === 'total') continue
+            thinking[rating_bin] -= distrib[value][rating_bin]
+            for (let id = 0; id < distrib[value][rating_bin]; ++id) {
+                let kolpak_obj = undefined
+                if (id < kolpaki[value][rating_bin].length) {
+                    kolpak_obj = kolpaki[value][rating_bin][id]
+                    console.log('kolpak: ' + kolpak_obj)
+                }
+                let opts = undefined
+                if (id < options[value][rating_bin].length) {
+                    opts = options[value][rating_bin][id]
+                }
+                create_rated_chel(value, rating_bin, current_total, kolpak_obj, opts)
+                current_total += 1
+            }
+        }
+    }
+
+    if (thinking['total'] < 0) {
+        thinking['total'] = 0
+    }
+    document.getElementById('crowd-stat').innerHTML += ' (' + thinking['total'] + ')'
+    for (let rating_bin in thinking) {
+        if (rating_bin == 'total') continue
+        for (let id = 0; id < thinking[rating_bin]; ++id) {
+            create_rated_chel('crowd', rating_bin, 0, undefined, undefined)
+        }
+    }
+
+    function change_time() {
+        let today = new Date();
+        let deadline = new Date('Wed May 13 2020 23:59:59 GMT+0300 (MSK)');
+        let diff = deadline - today
+        if (diff < 0) {
+            diff = 0
+        }
+        let msec = '' + Math.floor(diff % 1000)
+        diff /= 1000
+        let sec = '' + Math.floor(diff % 60)
+        diff /= 60
+        let minutes = '' + Math.floor(diff % 60)
+        diff /= 60
+        let hours = '' + Math.floor(diff % 24)
+        diff /= 24
+        let days = '' + Math.floor(diff)
+        if (sec.length == 1) sec = '0' + sec
+        if (minutes.length == 1) minutes = '0' + minutes
+        if (hours.length == 1) hours = '0' + hours
+        if (days.length == 1) days = '0' + days
+        document.getElementById('timer').innerHTML = days + ':' + hours + ':' + minutes + ':' + sec
+    }
+
+    setInterval(change_time, 1000)
+    change_time()
+</script>
+
+<script>
+    let doors_metric = document.getElementById('doors_obj').getBoundingClientRect()
+    let body_metric = document.body.getBoundingClientRect()
+    if (body_metric.width < doors_metric.width) {
+        document.body.style.width = doors_metric.width + 'px';
+    }
+</script>
+
+</body>
+</html>
